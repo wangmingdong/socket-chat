@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>在线聊天工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <ul class="pages">
+        <li class="chat page">
+            <div class="chatArea">
+                <ul class="messages"></ul>
+            </div>
+            <input class="inputMessage" placeholder="输入..." />
+        </li>
+        <li class="login page">
+            <div class="form">
+                <h3 class="title">输入昵称</h3>
+                <input class="usernameInput" type="text" maxlength="14" />
+            </div>
+        </li>
+    </ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="/main.js"></script>
+    <script>
+        $(function() {
+            var socket = io();
+            $('form').submit(function() {
+                socket.emit('chat message', $('#m').val());
+                $('#m').val('');
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>
